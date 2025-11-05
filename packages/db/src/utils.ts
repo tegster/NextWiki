@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { db } from "./index.js";
-import { sql } from "drizzle-orm";
+import { getEM } from "./index.js";
 
 /**
  * Executes a raw SQL migration script from a given file path.
@@ -26,10 +25,9 @@ export async function runRawSqlMigration(
     }
 
     console.log(`Executing raw SQL migration from: ${absolutePath}`);
-    // Use db.execute for drivers like pg, mysql2, neon
-    // Use db.run for drivers like better-sqlite3
-    // Assuming a PostgreSQL-compatible driver here based on pg_trgm usage seen elsewhere.
-    await db.execute(sql.raw(migrationSql));
+    const em = await getEM();
+    const connection = em.getConnection();
+    await connection.execute(migrationSql);
 
     console.log(`Successfully executed migration: ${absolutePath}`);
   } catch (error) {

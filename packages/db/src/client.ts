@@ -1,8 +1,8 @@
 // Client-safe exports for the @repo/db package
 
-// Re-export all types from the schema index
+// Re-export all entity types
 // These are stripped by the build process and safe for client import
-export type * from "./schema/index.js";
+export type * from "./entities/index.js";
 
 // Re-export types from the registry
 export type {
@@ -21,4 +21,4 @@ export {
   getAllPermissions,
 } from "./registry/permissions.js";
 
-// DO NOT export the db instance, seed function, or server-only functions here.
+// DO NOT export the ORM instance, seed function, or server-only functions here.

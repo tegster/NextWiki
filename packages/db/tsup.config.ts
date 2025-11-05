@@ -4,10 +4,11 @@ import { exec } from "child_process"; // Import exec for onSuccess command
 export default defineConfig({
   entry: ["src/index.ts", "src/client.ts"], // Add client.ts entry point
   format: ["esm", "cjs"], // Output formats
-  dts: true, // Generate .d.ts files
+  dts: { resolve: true }, // Generate .d.ts files with resolution
   splitting: false, // Keep everything in one file per format
   sourcemap: true, // Generate source maps
   clean: true, // Clean dist folder before build
+  external: ["@repo/types", "@repo/logger"], // Mark workspace deps as external
   outExtension(ctx) {
     // Ensure .cjs extension for commonjs
     return {

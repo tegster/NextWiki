@@ -6,7 +6,6 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:web": "turbo watch dev --filter=web",
-    "dev:backend": "turbo watch dev --filter=backend",
     "start": "turbo run start",
     "start:web": "turbo run start --filter=web",
     "lint": "turbo run lint",
