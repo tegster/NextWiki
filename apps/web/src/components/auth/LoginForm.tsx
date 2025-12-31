@@ -7,7 +7,6 @@ import { signIn } from "next-auth/react";
 import { Alert, AlertDescription } from "@repo/ui";
 import { Button } from "@repo/ui";
 import { Input } from "@repo/ui";
-import { useSetting } from "~/lib/hooks/use-settings";
 import { usePermissions } from "./permission/client";
 
 // Create a separate component to read searchParams to work with Suspense
@@ -28,13 +27,16 @@ function RegistrationSuccessMessage() {
   );
 }
 
-export function LoginForm() {
+interface LoginFormProps {
+  allowRegistration?: boolean;
+}
+
+export function LoginForm({ allowRegistration = false }: LoginFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { value: allowRegistration } = useSetting("auth.allowRegistration");
   const { reloadPermissions } = usePermissions();
 
   const handleSubmit = async (e: React.FormEvent) => {
